@@ -1,0 +1,42 @@
+.team-chip {
+  display: inline-block;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+
+.team-ANA { background: #f47a38; }
+.team-BOS { background: #ffb81c; color: #111111; }
+.team-BUF { background: #003087; }
+.team-CGY { background: #c8102e; }
+.team-CAR { background: #cc0000; }
+.team-CHI { background: #cf0a2c; }
+.team-COL { background: #6f263d; }
+.team-CBJ { background: #002654; }
+.team-DAL { background: #006847; }
+.team-DET { background: #ce1126; }
+.team-EDM { background: #041e42; }
+.team-FLA { background: #c8102e; }
+.team-LAK { background: #111111; }
+.team-MIN { background: #154734; }
+.team-MTL { background: #af1e2d; }
+.team-NSH { background: #ffb81c; color: #111111; }
+.team-NJD { background: #ce1126; }
+.team-NYI { background: #00539b; }
+.team-NYR { background: #0038a8; }
+.team-OTT { background: #c52032; }
+.team-PHI { background: #f74902; }
+.team-PIT { background: #fcb514; color: #111111; }
+.team-SEA { background: #001628; }
+.team-SJS { background: #006d75; }
+.team-STL { background: #002f87; }
+.team-TBL { background: #002868; }
+.team-TOR { background: #00205b; }
+.team-UTA { background: #4b5d6b; }
+.team-VAN { background: #00205b; }
+.team-VGK { background: #b4975a; color: #111111; }
+.team-WSH { background: #c8102e; }
+.team-WPG { background: #041e42; }
+.team-N-A { background: #64748b; }
