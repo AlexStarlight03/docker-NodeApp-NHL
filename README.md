@@ -1,4 +1,19 @@
-docker build -t nodefix .
-docker run -d --name appnode -p 8080:80 nodefix
+# NHL Game Updates — Mini application Node.js
 
-ce rendre sur localhost:8080
+Petit projet Node.js qui affiche les matchs NHL d'une journée donnée et le play-by-play.
+
+Port utilisé: 80
+
+Prérequis:
+
+- Docker installé
+
+Construire et lancer le projet :
+
+```bash
+docker run -d --name nhlgameupdates -p 8080:80 AlexStarlight03/nhlgameupdates:latest
+```
+
+Pour utiliser l'application localement:
+
+Rendez-vous sur http://localhost:8080

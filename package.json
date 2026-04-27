@@ -1,11 +1,11 @@
 {
   "name": "nhl-stats-app",
   "version": "1.0.0",
-  "description": "Mini application Node.js qui affiche les matchs NHL du jour",
-  "main": "app/app.js",
+  "description": "Mini application Node.js qui affiche les matchs NHL d'une journée donnée et le play-by-play complet.",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node app/app.js",
-    "dev": "node --watch app/app.js"
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
   },
   "dependencies": {
     "express": "^5.1.0"
