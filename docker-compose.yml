@@ -1,0 +1,52 @@
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: tp3_client_dev
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: tp3_api_dev
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    depends_on:
+      - database
+
+  database:
+    image: mongo:7
+    container_name: tp3_database
+    ports:
+      - "27017:27017"
+    volumes:
+      - database_data:/data/db
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: tp3_nginx_dev
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - client
+      - api
+
+volumes:
+  database_data:
