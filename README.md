@@ -2,13 +2,11 @@
 
 ## Description du projet
 
-Cette application permet de suivre des equipes NHL preferees par utilisateur et de consulter les matchs du jour :
+Cette application de voir les matchs de la LNH pour une journée spécifique et permet de facilement voir les matchs de vos équipes préférées:
 
-- creation de compte et connexion ;
-- gestion CRUD des equipes favorites ;
-- affichage des matchs du jour lies aux equipes favorites.
-
-Le projet est concu pour fonctionner avec plusieurs services Docker en developpement et en production.
+- création de compte et connexion
+- gestion CRUD des équipes favorites
+- affichage des matchs du jour pour soit toutes les équipes ou seulement les équipes favorites.
 
 ## Architecture
 
@@ -16,10 +14,6 @@ Le projet est concu pour fonctionner avec plusieurs services Docker en developpe
 - api : API Node.js avec Express
 - database : MongoDB avec volume persistant
 - nginx : reverse proxy et serveur web en production
-
-Flux cible :
-
-Navigateur -> nginx -> client React + /api vers API -> MongoDB
 
 ## Structure du projet
 
@@ -34,32 +28,13 @@ Navigateur -> nginx -> client React + /api vers API -> MongoDB
 └── README.md
 ```
 
-## Variables d'environnement
-
-Copier `.env.example` vers `.env` et ajuster les valeurs si necessaire.
-
-Variables minimales :
-
-- `PORT=5000`
-- `MONGO_URL=mongodb://database:27017/tp3`
-- `JWT_SECRET=change_this_secret`
-- `VITE_API_URL=http://localhost:5000/api` (utile surtout en dev)
-
-## Lancement en developpement
+## Lancement en développement
 
 Commande :
 
 ```bash
 docker compose up --build
 ```
-
-Acces :
-
-- React direct : `http://localhost:5173`
-- API direct : `http://localhost:5000/api/health`
-- nginx dev (proxy) : `http://localhost:8080`
-
-Le mode dev utilise des bind mounts pour le live reload (client + api).
 
 ## Lancement en production
 
@@ -69,56 +44,32 @@ Commande recommandee :
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build
 ```
 
-En production :
+## Variables d'environnement
 
-- le client est build et servi par nginx ;
-- les requetes `/api` passent par nginx vers le service API ;
-- la base conserve les donnees via le volume nomme `database_data` ;
-- les services internes ne sont pas exposes inutilement.
+Copier `.env.example` vers `.env` et ajuster les valeurs si nécessaire.
 
-Note : en production, le client utilise une URL relative `/api`, donc `VITE_API_URL` n'est pas requis pour le build final.
+Variables minimales :
+
+- `PORT=5000`
+- `MONGO_URL=mongodb://database:27017/tp3`
+- `JWT_SECRET=change_this_secret`
+- `VITE_API_URL=http://localhost:5000/api` (utile surtout en dev)
+
 
 ## Routes de l'API
 
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `GET /api/teams`
-- `GET /api/favorites`
-- `POST /api/favorites`
-- `PUT /api/favorites/:id`
-- `DELETE /api/favorites/:id`
-- `GET /api/favorites/matches/today`
+- `POST /api/auth/register` pour créer un nouveau compte
+- `POST /api/auth/login` pour se connecter à un compte existant
+- `GET /api/teams`  obtenir toutes les équipes de la LNH
+- `GET /api/favorites`  obtenir la liste des favoris de l'utilisateur
+- `POST /api/favorites`  ajouter une équipe aux favoris de l'utilisateur connecté
+- `PUT /api/favorites/:id` remplace une équipe favorite de l'utilisateur connecté
+- `DELETE /api/favorites/:id` enlever une équipe des favoris de l'utilisateur connecté
+- `GET /api/favorites/matches/today` obtenir la liste des matchs des équipes favorites pour la journée actuelle
+- `GET api/matches/:gameId/play-by-play` obtenir le play-by-play d'un match spécifique
+- `GET api/matches/:date` obtenir tous les matchs pour une date donnée
 
-## Commandes utiles
+## Problème rencontré
 
-```bash
-docker compose up --build
-docker compose down
-docker compose down -v
-docker compose ps
-docker compose logs
-docker compose logs -f
-docker compose up api
-docker compose exec api sh
-```
+À partir de mon arborescence de fichier, comment monter ce projet pour bien le séparer en différents services. Le début de ce projet a été le plus difficile, relire mon code et réfléchir à quelle place chaque fonction aurait plus sa place. Au final, relire les notes de cours et les exercices d'exemple m'ont aidés et quand je regarde ce TP3 l'arborescence me semble simple et logique grâce à ma meilleure compréhension comparé au début du projet.
 
-## Probleme rencontre et solution
-
-Probleme : en frontend, utiliser `http://api:5000` ne fonctionne pas depuis le navigateur car `api` est un nom DNS interne Docker.
-
-Solution :
-
-- en developpement, utiliser `VITE_API_URL=http://localhost:5000/api` ;
-- en production, utiliser une URL relative (`/api`) pour que nginx route vers l'API.
-
-Probleme : le projet contenait encore une ancienne arborescence TP2 a la racine.
-
-Solution : suppression des fichiers legacy non utilises au profit de l'architecture TP3 avec `client/`, `api/` et `nginx/`.
-
-## Bonnes pratiques appliquees
-
-- variables sensibles externalisees ;
-- fichier `.env.example` fourni ;
-- `node_modules`, `.env`, `dist`, `build` ignores ;
-- volume nomme pour la persistence MongoDB ;
-- separation dev/prod avec deux fichiers Compose.
