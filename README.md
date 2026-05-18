@@ -2,7 +2,7 @@
 
 ## Description du projet
 
-Cette application permet de suivre des equipes NHL preferees par utilisateur :
+Cette application permet de suivre des equipes NHL preferees par utilisateur et de consulter les matchs du jour :
 
 - creation de compte et connexion ;
 - gestion CRUD des equipes favorites ;
@@ -57,7 +57,7 @@ Acces :
 
 - React direct : `http://localhost:5173`
 - API direct : `http://localhost:5000/api/health`
-- nginx dev (proxy) : `http://localhost`
+- nginx dev (proxy) : `http://localhost:8080`
 
 Le mode dev utilise des bind mounts pour le live reload (client + api).
 
@@ -76,15 +76,9 @@ En production :
 - la base conserve les donnees via le volume nomme `database_data` ;
 - les services internes ne sont pas exposes inutilement.
 
+Note : en production, le client utilise une URL relative `/api`, donc `VITE_API_URL` n'est pas requis pour le build final.
+
 ## Routes de l'API
-
-Routes minimales TP :
-
-- `GET /api/health`
-- `GET /api/items`
-- `POST /api/items`
-
-Routes ajoutees (comptes + favoris) :
 
 - `POST /api/auth/register`
 - `POST /api/auth/login`
@@ -116,6 +110,10 @@ Solution :
 
 - en developpement, utiliser `VITE_API_URL=http://localhost:5000/api` ;
 - en production, utiliser une URL relative (`/api`) pour que nginx route vers l'API.
+
+Probleme : le projet contenait encore une ancienne arborescence TP2 a la racine.
+
+Solution : suppression des fichiers legacy non utilises au profit de l'architecture TP3 avec `client/`, `api/` et `nginx/`.
 
 ## Bonnes pratiques appliquees
 

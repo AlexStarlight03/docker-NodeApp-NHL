@@ -17,7 +17,6 @@ export default function MatchDetail({
       return;
     }
 
-    // Load initial batch
     const firstBatch = gameData.plays.slice(0, BATCH_SIZE);
     setDisplayedPlays(firstBatch);
     setLoadedCount(Math.min(BATCH_SIZE, gameData.plays.length));
@@ -47,10 +46,6 @@ export default function MatchDetail({
   function isSeparatorType(type) {
     const eventType = String(type || "").toLowerCase();
     return eventType === "stoppage" || eventType === "period-start" || eventType === "period-end";
-  }
-
-  function isPeriodEndType(type) {
-    return String(type || "").toLowerCase() === "period-end";
   }
 
   function playersText(players) {

@@ -23,7 +23,6 @@ async function request(path, options = {}, token) {
 }
 
 export const api = {
-  health: () => request("/health"),
   register: (payload) => request("/auth/register", { method: "POST", body: JSON.stringify(payload) }),
   login: (payload) => request("/auth/login", { method: "POST", body: JSON.stringify(payload) }),
   getTeams: (token) => request("/teams", {}, token),

@@ -18,9 +18,8 @@ export default function App() {
   const [matches, setMatches] = useState([]);
   const [date, setDate] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("");
-  const [currentPage, setCurrentPage] = useState("dashboard"); // "dashboard", "favorites", or "match-detail"
+  const [currentPage, setCurrentPage] = useState("dashboard");
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(true);
-  const [selectedGameId, setSelectedGameId] = useState(null);
   const [gameData, setGameData] = useState(null);
   const [gameLoading, setGameLoading] = useState(false);
   const [gameError, setGameError] = useState("");
@@ -131,7 +130,6 @@ export default function App() {
   }
 
   async function handleSelectMatch(gameId) {
-    setSelectedGameId(gameId);
     setCurrentPage("match-detail");
     setGameLoading(true);
     setGameError("");
@@ -148,7 +146,6 @@ export default function App() {
 
   function handleBackFromMatchDetail() {
     setCurrentPage("dashboard");
-    setSelectedGameId(null);
     setGameData(null);
     setGameError("");
   }

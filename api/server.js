@@ -3,8 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const healthRoutes = require("./routes/health");
-const itemRoutes = require("./routes/items");
 const authRoutes = require("./routes/auth");
 const favoriteRoutes = require("./routes/favorites");
 
@@ -14,8 +12,6 @@ const port = Number(process.env.PORT || 5000);
 app.use(cors());
 app.use(express.json());
 
-app.use("/api", healthRoutes);
-app.use("/api", itemRoutes);
 app.use("/api", authRoutes);
 app.use("/api", favoriteRoutes);
 
