@@ -7,6 +7,7 @@ Cette application de voir les matchs de la LNH pour une journée spécifique et 
 - création de compte et connexion
 - gestion CRUD des équipes favorites
 - affichage des matchs du jour pour soit toutes les équipes ou seulement les équipes favorites.
+- affichage des matchs avec le play-by-play par période en ordre chronologique.
 
 ## Architecture
 
