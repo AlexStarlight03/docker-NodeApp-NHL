@@ -1,0 +1,37 @@
+services:
+  client:
+    profiles: ["disabled"]
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    container_name: tp3_nginx_prod
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: tp3_api_prod
+    command: npm start
+    env_file:
+      - .env
+    expose:
+      - "5000"
+    depends_on:
+      - database
+
+  database:
+    image: mongo:7
+    container_name: tp3_database_prod
+    expose:
+      - "27017"
+    volumes:
+      - database_data:/data/db
+
+volumes:
+  database_data:
