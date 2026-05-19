@@ -37,13 +37,16 @@ Commande :
 docker compose up --build
 ```
 
+Accéder à l'application: http://localhost:8080
+
 ## Lancement en production
 
 Commande recommandee :
 
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build
+docker compose -f docker-compose.prod.yml up --build
 ```
+Accéder à l'application: http://localhost:8080
 
 ## Variables d'environnement
 
